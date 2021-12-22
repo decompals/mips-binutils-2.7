@@ -51,8 +51,7 @@ jobs:
         shell: bash
         run: |
           cd /opt/cross/bin
-          ls
-          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-*
+          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-ar
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
