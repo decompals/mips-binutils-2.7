@@ -52,12 +52,13 @@ jobs:
         run: |
           cd /opt/cross/bin
           tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-ar
+          mv ${{ matrix.TARGET.ARCHIVE_NAME }} ~/
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
           name: binutils-2.7-${{ matrix.TARGET.OS }}
           path: |
-            /opt/cross/bin/${{ matrix.TARGET.ARCHIVE_NAME }}
+            ${{ matrix.TARGET.ARCHIVE_NAME }}
       - name: Update release
         uses: johnwbyrd/update-release@v1.0.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
