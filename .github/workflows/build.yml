@@ -13,7 +13,7 @@ jobs:
               OS: 'ubuntu-latest',
               CFLAGS: '-static',
               HOST: 'i386-pc-linux',
-              ARCHIVE_NAME: 'linux.tar.gz'
+              ARCHIVE_NAME: 'binutils-2.7.tar.gz'
             }
           # - {
           #     OS: 'macos-latest',
@@ -51,7 +51,8 @@ jobs:
         shell: bash
         run: |
           cd /opt/cross/bin
-          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} *
+          ls
+          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} ar
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
