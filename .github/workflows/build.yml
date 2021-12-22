@@ -53,6 +53,8 @@ jobs:
           cd /opt/cross/bin
           tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-ar
           mv ${{ matrix.TARGET.ARCHIVE_NAME }} ~/
+          pwd
+          ls
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
