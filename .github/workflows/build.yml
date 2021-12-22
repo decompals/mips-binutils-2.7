@@ -50,13 +50,8 @@ jobs:
       - name: Create release archive
         shell: bash
         run: |
-          pwd
-          cd /opt/cross/bin
-          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-ar
-          mv ${{ matrix.TARGET.ARCHIVE_NAME }} ~/
-          cd ~/
-          pwd
-          ls
+          cp /opt/cross/bin/mips-mips-elf-ar ar
+          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} ar
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
