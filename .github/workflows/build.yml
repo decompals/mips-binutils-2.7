@@ -50,6 +50,7 @@ jobs:
       - name: Create release archive
         shell: bash
         run: |
+          pwd
           cd /opt/cross/bin
           tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} mips-mips-elf-ar
           mv ${{ matrix.TARGET.ARCHIVE_NAME }} ~/
