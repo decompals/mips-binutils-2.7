@@ -41,6 +41,7 @@ jobs:
         shell: bash
         run: |
           make CFLAGS="${{ matrix.TARGET.CFLAGS }}"
+          sudo make install
       - name: Test for file
         shell: bash
         run: |
@@ -49,7 +50,8 @@ jobs:
       - name: Create release archive
         shell: bash
         run: |
-          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} binutils/ar
+          cd /opt/cross/bin
+          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} *
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
@@ -58,7 +60,7 @@ jobs:
             ${{ matrix.TARGET.ARCHIVE_NAME }}
       - name: Update release
         uses: johnwbyrd/update-release@v1.0.0
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           files: ${{ matrix.TARGET.ARCHIVE_NAME }}
