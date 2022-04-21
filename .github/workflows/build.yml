@@ -41,6 +41,8 @@ jobs:
         run: |
           test -f binutils/ar
           file binutils/ar
+          test -f binutils/strip.new
+          file binutils/strip.new
       - name: Create release archive
         shell: bash
         run: |
@@ -48,6 +50,10 @@ jobs:
           strip ar
           chmod +x ar
           tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} ar
+          cp /opt/cross/bin/mips-mips-elf-strip strip-2.7
+          strip strip-2.7
+          chmod +x strip-2.7
+          tar -czf ${{ matrix.TARGET.ARCHIVE_NAME }} strip-2.7
       - name: Upload archive
         uses: actions/upload-artifact@v2
         with:
